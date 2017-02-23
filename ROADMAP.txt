@@ -1,0 +1,36 @@
+- Design simple interface for non-it people
+
+* Landing page
+
+    - One list of Angular Contributors (form all repositories)
+        - link to contributors page
+
+    - Filter
+        - by amount of contributions
+        - by amount of followers
+        - by public repositories
+        - by gist published
+
+    [DATA]
+        - get data of all angular repositories
+        - from each repositories take out all contributors
+        - join to one list
+
+* Contributor page
+
+    - List of all repositories HE/SHE contributed
+        - link to repository details page
+
+    - Contributor details
+
+    [DATA]
+        - get ID of selected contributor from the list of all contributors
+        - by ID get contributor data / or bind data from list of contributors if possible
+
+* Repository details page
+
+    - Details of repository
+    - List of contributors
+
+    [DATA]
+        - get ID of selected repository and ask for data / or bind data from list if possible

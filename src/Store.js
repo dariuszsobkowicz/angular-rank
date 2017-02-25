@@ -1,48 +1,70 @@
 import $ from "jquery"
 
+export const urls = {
+    base:  "https://api.github.com",
+    repos: "/orgs/angular/repos",
+    key:   "?client_id=ba16a9030ca02977eadd&client_secret=2f47a44c789f7d9838450bfe334846e837cc953d"
+};
+
 export const store = {
-    urls:  {
-        baseUrl:   "https://api.github.com",
-        reposUrl:  "/orgs/angular/repos",
-        usersUrls: [],
-        key:       "?client_id=ba16a9030ca02977eadd&client_secret=2f47a44c789f7d9838450bfe334846e837cc953d"
-    },
     state: {
-        reposData: [],
-        usersData: [],
+        repos:    [],
+        users:    {},
+        mapUsers: []
     }
 };
 
-export function getData (store, callback) {
-    $.getJSON(store.urls.baseUrl + store.urls.reposUrl + store.urls.key)
-        .then((response) => {
-            store.state.reposData = response;
-            getContributors(response, store, () => {
-                getUserData(store, callback);
+export function dispatchData (callback) {
+    collectData(urls, store, function () {
+        callback()
+    });
+}
+
+function collectData (urls, store, callback) {
+    $.getJSON(urls.base + urls.repos + urls.key)
+        .then((repos) => {
+            store.state.repos = repos;
+            getUsers(repos, store, () => {
+                store.state.mapUsers = Object.keys(store.state.users).map(key => store.state.users[key]);
+                store.state.mapUsers.sort((a, b) => b.contributions - a.contributions);
+                callback();
             })
         })
 }
 
-function getUserData (store, callback) {
-    const arr = [];
+function getData (urls) {
+    const dfd = new $.Deferred();
     let counter = 0;
-    store.urls.usersUrls.forEach((url) => $.getJSON(url)
-        .then((response) => {
+    const arr = [];
+
+    urls.forEach((url) => {
+        $.getJSON(url).then((response) => {
             counter++;
             arr.push(...response);
-            if (store.urls.usersUrls.length === counter) {
-                store.state.usersData = arr;
-                callback()
+            if (urls.length === counter) {
+                dfd.resolve(arr)
             }
         })
-    );
+    });
+
+    return dfd
 }
 
-function getContributors (response, store, callback) {
-    store.urls.usersUrls = getUsersUrlsFromRepos(response);
-    callback()
+function getUsers (repos, store, callback) {
+    const urls = getUrls(repos);
+
+    $.when(getData(urls)).then(function (users) {
+        users.forEach((user) => {
+            if (!(store.state.users.hasOwnProperty(user.login))) {
+                store.state.users[user.login] = user
+            } else {
+                store.state.users[user.login].contributions += user.contributions
+            }
+        });
+        callback()
+    });
 }
 
-function getUsersUrlsFromRepos (repos) {
-    return repos.map((repo) => repo.contributors_url)
+function getUrls (repos) {
+    return repos.map((repo) => repo.contributors_url + urls.key)
 }

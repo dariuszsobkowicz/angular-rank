@@ -13,6 +13,10 @@
   align-items: center;
   cursor: pointer;
   font-weight: 900;
+
+  &:hover {
+    background-color: #dedcee;
+  }
 }
 .list-item > div {
   flex: 0 0 11rem;
@@ -20,10 +24,12 @@
 .list-item > div:first-child {
   display: flex;
   align-items: center;
+  margin-left: 1.5rem;
 }
 .list-item > div:last-child {
   margin-left: auto;
-  text-align: center;
+  margin-right: 1.5rem;
+  text-align: right;
   color: #3ac569;
 }
 .img-fluid {
@@ -58,6 +64,10 @@ div.location {
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: rgba(255, 255, 255, 1);
 }
 .filters > div {
   margin: 0.5rem;

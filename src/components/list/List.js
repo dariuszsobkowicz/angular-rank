@@ -36,10 +36,10 @@ function createList (name) {
 
 function createFilters () {
     return `<div class="filters">
-                <div><button class="contributions desc">Contributions</button></div>
-                <div><button class="followers desc">Followers</button></div>
-                <div><button class="repos desc">Repositories</button></div>
-                <div><button class="gists desc">Gists</button></div>
+                <div><button class="contributions active">Contributions</button></div>
+                <div><button class="followers">Followers</button></div>
+                <div><button class="repos">Repositories</button></div>
+                <div><button class="gists">Gists</button></div>
              </div>`;
 }
 
@@ -52,17 +52,32 @@ function assignListEvents () {
     });
 
     $(".contributions").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.contributions, "desc")
+        sortToggler($(this), filter.contributions);
     });
     $(".followers").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.followers, "asc")
+        sortToggler($(this), filter.followers);
     });
     $(".repos").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.repos, "asc")
+        sortToggler($(this), filter.repos);
     });
     $(".gists").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.gists, "asc")
+        sortToggler($(this), filter.gists);
     });
+}
+
+function sortToggler (elem, filter) {
+    let sort = "";
+    if (elem.is(".active")) {
+        sort = elem.is(".desc") ? "desc" : "asc";
+        elem.toggleClass("desc");
+    } else {
+       $(".filters button").each(function () {
+           $(this).removeClass("active");
+       });
+       elem.addClass("active");
+       sort = "desc"
+    }
+    sortUsers(store.state.mapUsers, filter, sort)
 }
 
 function createTemplate (item, name) {
@@ -80,10 +95,10 @@ function createTemplate (item, name) {
 }
 
 export function sortUsers (data, filter, type) {
-    if (type === "asc") {
+    if (type === "desc") {
         data.sort((a, b) => b[filter] - a[filter]);
         replaceList(filter)
-    } else if (type === "desc") {
+    } else if (type === "asc") {
         data.sort((a, b) => a[filter] - b[filter]);
         replaceList(filter)
     }

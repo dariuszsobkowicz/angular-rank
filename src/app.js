@@ -1,24 +1,13 @@
 import $ from "jquery"
-import { store, dispatchData, filter } from "./Store";
-import { renderList, sortUsers } from "./List"
+import { store, dispatchData, filter } from "./components/store/Store";
+import { renderList, sortUsers } from "./components/list/List"
 
+import "meyer-reset-sass";
+import "./scss/main.scss"
 
 $(function () {
     dispatchData(function () {
         renderList();
-    });
-
-    $("#contributions").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.contributions, "desc")
-    });
-    $("#followers").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.followers, "asc")
-    });
-    $("#repos").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.repos, "asc")
-    });
-    $("#gists").on("click", function () {
-        sortUsers(store.state.mapUsers, filter.gists, "asc")
     });
 
 });

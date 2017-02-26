@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { store } from "./Store";
+import { store } from "../store/Store";
 
 export function renderRepo (elem) {
     const root = $("#root");

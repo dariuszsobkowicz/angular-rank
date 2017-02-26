@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { renderRepo } from "./Repo";
+import { renderRepo } from "../repo/Repo";
 
 export function renderUser (data) {
     const user = data.data("user");

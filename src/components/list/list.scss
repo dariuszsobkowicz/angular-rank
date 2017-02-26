@@ -1,0 +1,73 @@
+// List
+
+.list {
+  padding: 0 9rem;
+  font-size: 2.5rem;
+  display: flex;
+  flex-flow: column wrap;
+}
+.list-item {
+  border-top: 3px solid #dedcee;
+  flex: 0 0 13rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 900;
+}
+.list-item > div {
+  flex: 0 0 11rem;
+}
+.list-item > div:first-child {
+  display: flex;
+  align-items: center;
+}
+.list-item > div:last-child {
+  margin-left: auto;
+  text-align: center;
+  color: #3ac569;
+}
+.img-fluid {
+  border-radius: 0.675rem;
+  width: 100%;
+  height: auto;
+}
+.user-name {
+  font-size: 1.9rem;
+  margin-left: 4rem;
+  text-decoration: underline;
+}
+div.location {
+  font-size: 1.5rem;
+  margin-left: 4rem;
+  flex: 1 1 auto;
+  color: #34314c;
+}
+
+// Container
+
+.container {
+  position: relative;
+  top: -3rem;
+}
+
+// Filters
+
+.filters {
+  font-size: 1.6rem;
+  padding: 2rem 9rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+}
+.filters > div {
+  margin: 0.5rem;
+  border-radius: 0.475rem;
+  border: 2px solid black;
+  flex: 1 1 15rem;
+}
+.filters button {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: inherit;
+}

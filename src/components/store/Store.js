@@ -61,10 +61,10 @@ function collectData (urls, store, callback) {
 
                 fetchDetailsForFilters(store.state.mapUsers, function () {
                     console.log("READY");
-                    console.log(store.state)
+                    callback();
                 });
 
-                callback();
+
             })
         })
 }

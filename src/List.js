@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { store } from "./Store"
-import { getQty } from "./Filter"
+import { renderUser } from "./User";
 
 export function renderList (name = "contributions") {
     const root = $("#root");
@@ -13,27 +13,37 @@ export function renderList (name = "contributions") {
 
     list.empty();
     const items = store.state.mapUsers.map((item) => createTemplate(item, name));
-    list.append(items)
+    list.append(items);
+
+    assignListEvents();
+}
+
+function assignListEvents () {
+    const li = $("li");
+
+    li.on("click", function () {
+        const that = $(this);
+        renderUser(that)
+    })
 }
 
 function createTemplate (item, name) {
-    return `<li>
-               ${item.login} <b>${item[name]}</b>
-            </li>`
+    const li = $("<li></li>");
+    li.data("user", item);
+    const template = `<div>
+                        ${item.login} <b>${item[name]}</b>
+                      </div>`;
+
+    li.append(template);
+    return li
 }
 
 export function sortUsers (data, filter, type) {
-
-    getQty(filter, function () {
-
-        if (type === "asc") {
-            data.sort((a, b) => b[filter.name] - a[filter.name]);
-            renderList(filter.name)
-        } else if (type === "desc") {
-            data.sort((a, b) => a[filter.name] - b[filter.name]);
-            renderList(filter.name)
-        }
-
-    });
-
+    if (type === "asc") {
+        data.sort((a, b) => b[filter] - a[filter]);
+        renderList(filter)
+    } else if (type === "desc") {
+        data.sort((a, b) => a[filter] - b[filter]);
+        renderList(filter)
+    }
 }

@@ -46,7 +46,7 @@ function createFilters () {
 function assignListEvents () {
     const list = $(".list");
     const body = $("body");
-    const close =$(".close");
+    const close = $(".close");
 
     list.on("click", "li", function (e) {
         e.stopImmediatePropagation();
@@ -87,11 +87,11 @@ function sortToggler (elem, filter) {
         sort = elem.is(".desc") ? "desc" : "asc";
         elem.toggleClass("desc");
     } else {
-       $(".filters button").each(function () {
-           $(this).removeClass("active");
-       });
-       elem.addClass("active");
-       sort = "desc"
+        $(".filters button").each(function () {
+            $(this).removeClass("active");
+        });
+        elem.addClass("active");
+        sort = "desc"
     }
     sortUsers(store.state.mapUsers, filter, sort)
 }

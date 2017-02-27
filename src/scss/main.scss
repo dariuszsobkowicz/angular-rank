@@ -1,7 +1,8 @@
-  html {
+html {
   box-sizing: border-box;
   font-size: 62.5%;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
@@ -15,20 +16,20 @@ body {
 header {
   height: 30rem;;
   background: #ff00cc;
-  background: -webkit-linear-gradient(to left, #ff00cc , #333399);
-  background: linear-gradient(to left, #ff00cc , #333399);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: -webkit-linear-gradient(to left, #ff00cc, #333399);
+  background: linear-gradient(to left, #ff00cc, #333399);
 }
 
 h1 {
   text-align: center;
   font-size: 5rem;
+  line-height: 30rem;
   text-transform: uppercase;
   color: rgba(255, 255, 255, .9);
   position: fixed;
-  margin: 0 1rem;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 #root {

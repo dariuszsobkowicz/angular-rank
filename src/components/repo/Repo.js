@@ -29,12 +29,14 @@ export function renderRepo (name) {
         const that = $(this);
         const user = that.data("user");
         renderUser(user);
-        //console.log(user)
     });
 }
 
 function repoTemplate (repo, users) {
     const box = $("<div class='box-frame'></div>");
+    const forks = repo.forks === 0 ? "zero" : repo.forks;
+    const watchers = repo.watchers === 0 ? "zero" : repo.watchers;
+    let counter = 0;
 
     const userDetails = `<div class="box-details">
                             <h2>${repo.name}</h2>
@@ -44,15 +46,22 @@ function repoTemplate (repo, users) {
                             </ul>
                          </div>`;
 
-    const reposContainer = $("<div class='box-list'><ul><h3>Contributors</h3></ul></div>");
+    const reposContainer = $("<div class='box-list'></div>");
+    const ul = $("<ul></ul>");
     const reposList = users.map((user) => {
+        counter++;
         const name = user.name === null ? user.login : user.name;
         const elem = $("<li class='box-list-item'></li>");
+        const span = $("<span class='repo-name'></span>");
         elem.data("user", user);
-        elem.text(name);
+        span.text(name);
+        elem.append(span);
         return elem;
     });
-    reposContainer.append(reposList);
+    ul.append(reposList);
+    const h3 = `<h3>Contributors List ( ${counter} )</h3>`;
+    reposContainer.append(h3);
+    reposContainer.append(ul);
 
     box.append(userDetails);
     box.append(reposContainer);

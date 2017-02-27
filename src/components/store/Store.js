@@ -1,4 +1,5 @@
-import $ from "jquery"
+import $ from "jquery";
+import { renderList } from "../list/List";
 
 export const urls = {
     base:  "https://api.github.com",
@@ -14,20 +15,29 @@ export const filter = {
     contributions: "contributions"
 };
 
-export const store = {
+export let store = {
     state: {
-        repos:    [],
+        repos:         [],
         mapReposUsers: {},
-        mapReposName: {},
-        users:    {},
-        mapUsers: []
+        mapReposName:  {},
+        users:         {},
+        mapUsers:      []
     }
 };
 
 export function dispatchData (callback) {
-    collectData(urls, store, function () {
-        callback();
-    });
+
+    const loadStore = window.localStorage.getItem("store");
+
+    if (loadStore !== null) {
+        store = JSON.parse(loadStore);
+        renderList();
+    } else {
+        collectData(urls, store, function () {
+            console.log(store);
+            callback();
+        });
+    }
 }
 
 export function fetchDetailsForFilters (users, callback) {

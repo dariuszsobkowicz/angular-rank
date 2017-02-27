@@ -1,40 +1,61 @@
 import $ from "jquery";
 import { store } from "../store/Store";
+import { renderUser, cleanContainer } from "../user/User";
 
-export function renderRepo (elem) {
-    const root = $("#root");
+export function renderRepo (name) {
     let users = [];
     let repo = [];
 
     for (let key in store.state.mapReposUsers) {
-        if (key === elem.dataset.name) {
+        if (key === name) {
             users = [...store.state.mapReposUsers[key]]
         }
     }
 
     for (let key in store.state.mapReposName) {
-        if (key === elem.dataset.name) {
+        if (key === name) {
             repo = store.state.mapReposName[key]
         }
     }
-    console.log(users);
-    console.log(repo);
-    const template = createTemplate(repo, users);
-    root.empty();
-    root.append(template)
 
+    cleanContainer();
+
+    const frame = repoTemplate(repo, users);
+
+    $(".lightbox").append(frame);
+
+    $(".box-list").on("click", "li", function (e) {
+        e.stopImmediatePropagation();
+        const that = $(this);
+        const user = that.data("user");
+        renderUser(user);
+        //console.log(user)
+    });
 }
 
-function createTemplate (repo, users) {
-    const container = $("<div></div>");
-    const ul = $("<ul></ul>");
-    const list = users.map((user) => `<li>${user.login}</li>`);
-    const details = `<div>
-                        <h2>${repo.full_name}</h2>       
-                     </div>`;
+function repoTemplate (repo, users) {
+    const box = $("<div class='box-frame'></div>");
 
-    ul.append(list);
-    container.append(details);
-    container.append(ul);
-    return container
+    const userDetails = `<div class="box-details">
+                            <h2>${repo.name}</h2>
+                            <ul>
+                                <li class="box-details-item">Forks <span class="box-details-number">${repo.forks}</span></li>
+                                <li class="box-details-item">Watchers <span class="box-details-number">${repo.watchers}</span></li>
+                            </ul>
+                         </div>`;
+
+    const reposContainer = $("<div class='box-list'><ul><h3>Contributors</h3></ul></div>");
+    const reposList = users.map((user) => {
+        const name = user.name === null ? user.login : user.name;
+        const elem = $("<li class='box-list-item'></li>");
+        elem.data("user", user);
+        elem.text(name);
+        return elem;
+    });
+    reposContainer.append(reposList);
+
+    box.append(userDetails);
+    box.append(reposContainer);
+
+    return box;
 }

@@ -71,7 +71,7 @@ div.location {
 }
 .filters > div {
   margin: 0.5rem;
-  border-radius: 0.475rem;
+  border-radius: 0.2rem;
   border: 2px solid black;
   flex: 1 1 15rem;
 }
@@ -80,4 +80,8 @@ div.location {
   background: transparent;
   border: none;
   font-size: inherit;
+  outline: none;
+}
+.filters .active {
+  background-color: #dedcee;
 }

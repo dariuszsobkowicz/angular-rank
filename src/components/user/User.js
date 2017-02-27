@@ -1,31 +1,46 @@
 import $ from "jquery";
 import { renderRepo } from "../repo/Repo";
 
-export function renderUser (data) {
-    const user = data.data("user");
+export function renderUser (user) {
     cleanContainer();
-    const template = userTemplate(user);
-    $("#root").append(template);
-    $(".repo").on("click", function () {
-        renderRepo(this)
-    })
-}
 
-export function cleanContainer () {
-    $("#root").empty();
+    const frame = userTemplate(user);
+
+    $(".lightbox").append(frame);
+
+    $(".box-list").on("click", "li", function (e) {
+        e.stopImmediatePropagation();
+        const that = $(this);
+        const repo = that.data("name");
+        renderRepo(repo);
+    })
+
 }
 
 function userTemplate (user) {
-    const container = $("<div></div>");
-    const ul = $("<ul></ul>");
+    const box = $("<div class='box-frame'></div>");
+    const userName = user.name === null ? user.login : user.name;
 
-    const reposList = user.contributed_repos.map((elem) => `<li class="repo" data-name=${elem}>${elem}</li>`);
-    const details = `<div>
-                        <h2>${user.name}</h2>
-                     </div>`;
+    const userDetails = `<div class="box-details">
+                            <h2>${userName}</h2>
+                            <ul>
+                                <li class="box-details-item">Contributions <span class="box-details-number">${user.contributions}</span></li>
+                                <li class="box-details-item">Followers <span class="box-details-number">${user.followers}</span></li>
+                                <li class="box-details-item">Public gists <span class="box-details-number">${user.public_gists}</span></li>
+                                <li class="box-details-item">Public repos <span class="box-details-number">${user.public_repos}</span></li>
+                            </ul>
+                         </div>`;
 
-    container.append(details);
-    container.append(reposList);
+    const reposContainer = $("<div class='box-list'><ul><h3>Repos</h3></ul></div>");
+    const reposList = user.contributed_repos.map((elem) => `<li class="box-list-item" data-name=${elem}>${elem}</li>`);
+    reposContainer.append(reposList);
 
-    return container
+    box.append(userDetails);
+    box.append(reposContainer);
+
+    return box;
+}
+
+export function cleanContainer () {
+    $(".lightbox").empty();
 }

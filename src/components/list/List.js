@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { store, filter } from "../store/Store"
-import { renderUser } from "../user/User";
+import { renderUser, cleanContainer } from "../user/User";
 
 import "./list.scss"
 
@@ -45,10 +45,26 @@ function createFilters () {
 
 function assignListEvents () {
     const list = $(".list");
+    const body = $("body");
+    const close =$(".close");
 
-    list.on("click", "li", function () {
+    list.on("click", "li", function (e) {
+        e.stopImmediatePropagation();
         const that = $(this);
-        renderUser(that)
+        const user = that.data("user");
+        $(".lightbox-container").slideDown(300);
+        renderUser(user)
+    });
+
+    body.on("click", function (e) {
+        e.stopImmediatePropagation();
+        $(".lightbox-container").hide();
+        cleanContainer();
+    });
+    close.on("click", function (e) {
+        e.stopImmediatePropagation();
+        $(".lightbox-container").hide();
+        cleanContainer();
     });
 
     $(".contributions").on("click", function () {

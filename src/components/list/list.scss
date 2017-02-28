@@ -103,6 +103,27 @@ div.location {
   background-color: #dedcee;
 }
 
+.more {
+  margin: 3rem 0;
+  text-align: center;
+
+  & button {
+    width: 15rem;
+    height: 4rem;
+    border: 2px solid rgba(58, 197, 105, 1);
+    outline: none;
+    border-radius: 0.5rem;
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 1);
+    background-color: transparent;
+
+    &:hover {
+      background-color: rgba(58, 197, 105, 1);
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+}
+
 // Media Queries
 
 @media screen and (max-width: 820px) {

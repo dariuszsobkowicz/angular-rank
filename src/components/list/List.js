@@ -4,14 +4,20 @@ import { renderUser, cleanContainer } from "../user/User";
 
 import "./list.scss"
 
+let num = 0;
+
 export function renderList (name = "contributions") {
     const root = $("#root");
     const filters = createFilters();
     const list = createList(name);
+    num = 30;
 
     root.empty();
     root.append(filters);
     root.append(list);
+
+    root.append($("<div class='more'><button>Show more</button></div>"));
+    hideItems();
 
     assignListEvents();
 }
@@ -21,6 +27,8 @@ function replaceList (name) {
     list.empty();
     const items = store.state.mapUsers.map((item) => createTemplate(item, name));
     list.append(items);
+
+    hideItems();
 }
 
 function createList (name) {
@@ -41,6 +49,12 @@ function createFilters () {
                 <div><button class="repos">Repositories</button></div>
                 <div><button class="gists">Gists</button></div>
              </div>`;
+}
+
+function hideItems () {
+    const items = $(".list li");
+    items.hide();
+    $(".list li:lt("+num+")").show();
 }
 
 function assignListEvents () {
@@ -89,6 +103,16 @@ function assignListEvents () {
     $(".gists").on("click", function () {
         sortToggler($(this), filter.gists);
     });
+
+    $(".more button").on("click", function () {
+        const items = $(".list li");
+        const listSize = items.length;
+
+        num = (num + 30 <= listSize) ? num + 30 : listSize;
+        $('.list li:lt('+num+')').show();
+        !(num >= listSize) || $(".more").hide();
+    });
+
 }
 
 function sortToggler (elem, filter) {

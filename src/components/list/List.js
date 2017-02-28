@@ -53,6 +53,10 @@ function assignListEvents () {
         const that = $(this);
         const user = that.data("user");
         $(".lightbox-container").slideDown(300);
+        $("body").css({
+            "position": "fixed"
+        });
+
         renderUser(user)
     });
 
@@ -60,11 +64,17 @@ function assignListEvents () {
         e.stopImmediatePropagation();
         $(".lightbox-container").hide();
         cleanContainer();
+        $("body").css({
+            "position": "relative"
+        });
     });
     close.on("click", function (e) {
         e.stopImmediatePropagation();
         $(".lightbox-container").hide();
         cleanContainer();
+        $("body").css({
+            "position": "relative"
+        });
     });
 
     $(".contributions").on("click", function () {

@@ -13,7 +13,7 @@ export function renderUser (user) {
 
     $(".lightbox").append(frame);
 
-    $(".box-list").on("click", "li", function (e) {
+    $(".box-list").on("click", "li a", function (e) {
         e.stopImmediatePropagation();
         const that = $(this);
         const repo = that.data("name");
@@ -32,7 +32,10 @@ function userTemplate (user) {
     let counter = 0;
 
     const userDetails = `<div class="box-details">
-                            <h2>${userName}</h2>
+                            <div class="box-details-header">
+                                <div><img src=${user.avatar_url} alt="Username" class="img-fluid"></div>
+                                <div><h2>${userName}</h2></div>
+                            </div>
                             <ul>
                                 <li class="box-details-item">Contributions <span class="box-details-number">${contributions}</span></li>
                                 <li class="box-details-item">Followers <span class="box-details-number">${followers}</span></li>
@@ -45,7 +48,7 @@ function userTemplate (user) {
     const reposList = user.contributed_repos.map((elem) => {
         counter++;
         counter = counter < 10 ? "0" + counter : counter;
-        return `<li class="box-list-item" data-name=${elem}><span class="counter">${counter}.</span> <span class="repo-name">${elem}</span></li>`
+        return `<li class="box-list-item"><span class="counter">${counter}.</span> <span class="repo-name"><a href="#" data-name=${elem}>${elem}</a></span></li>`
     });
     const ul = $("<ul></ul>");
     ul.append(reposList);

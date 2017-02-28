@@ -31,7 +31,7 @@ export function renderRepo (name) {
 
     $(".lightbox").append(frame);
 
-    $(".box-list").on("click", "li", function (e) {
+    $(".box-list").on("click", "li a", function (e) {
         e.stopImmediatePropagation();
         const that = $(this);
         const user = that.data("user");
@@ -46,7 +46,7 @@ function repoTemplate (repo, users) {
     let counter = 0;
 
     const userDetails = `<div class="box-details">
-                            <h2>${repo.name}</h2>
+                            <h2>Repo: ${repo.name}</h2>
                             <ul>
                                 <li class="box-details-item">Forks <span class="box-details-number">${repo.forks}</span></li>
                                 <li class="box-details-item">Watchers <span class="box-details-number">${repo.watchers}</span></li>
@@ -59,10 +59,10 @@ function repoTemplate (repo, users) {
         counter++;
         const name = user.name === null ? user.login : user.name;
         const elem = $("<li class='box-list-item'></li>");
-        const span = $("<span class='repo-name'></span>");
-        elem.data("user", user);
-        span.text(name);
-        elem.append(span);
+        const link = $("<a href='#' class='repo-name'></a>");
+        link.data("user", user);
+        link.text(name);
+        elem.append(link);
         return elem;
     });
     ul.append(reposList);

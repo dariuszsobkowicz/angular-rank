@@ -18,6 +18,7 @@
   display: flex;
   height: 100%;
   font-size: 1.6rem;
+  margin: 4rem 0 0 0;
 }
 
 .box-frame > div {
@@ -45,11 +46,15 @@
 .box-list-item {
   list-style: none;
   padding: 1rem;
-  cursor: pointer;
+
+  & a {
+    color: rgba(255, 255, 255, 1);
+    text-decoration: none;
+  }
 }
 
 .close {
-  text-align: right;
+  text-align: left;
   font-weight: 900;
   font-size: 2rem;
   cursor: pointer;
@@ -63,6 +68,21 @@
 
 .repo-name:hover {
   text-decoration: underline;
+}
+
+.box-details-header {
+  display: flex;
+  align-items: center;
+  flex-flow: column wrap;
+  margin: 0 0 2rem 0;
+
+  & div {
+    width: 50%;
+
+    & h2 {
+      text-align: center;
+    }
+  }
 }
 
 @media screen and (max-width: 625px) {

@@ -24,13 +24,13 @@
   flex: 0 0 11rem;
 }
 
-.list-item > div:first-child {
+.list-item div:first-child {
   display: flex;
   align-items: center;
   margin-left: 1.5rem;
 }
 
-.list-item > div:last-child {
+.list-item div:last-child {
   margin-left: auto;
   margin-right: 1.5rem;
   text-align: right;
@@ -43,10 +43,11 @@
   height: auto;
 }
 
-.user-name {
+.list-item .user-name {
   font-size: 1.9rem;
   margin-left: 4rem;
   text-decoration: underline;
+  flex: 0 0 20rem;
 }
 
 div.location {
@@ -111,7 +112,7 @@ div.location {
 }
 
 @media screen and (max-width: 1150px) {
-  .list, .user-name {
+  .list, .list-item .user-name {
     font-size: 1.5rem;
   }
 
@@ -154,12 +155,12 @@ div.location {
     z-index: 100;
   }
 
-  .list-item > div:first-child {
+  .list-item div:first-child {
     margin: 0 0 1rem 0;
     position: relative;
   }
 
-  .list-item > div:last-child {
+  .list-item div:last-child {
     margin: 0.5rem 0 2rem 0;
     text-align: center;
   }
@@ -170,8 +171,9 @@ div.location {
     height: auto;
   }
 
-  .user-name {
+  .list-item .user-name {
     margin: 0;
+    flex: 0;
   }
 
   div.location {

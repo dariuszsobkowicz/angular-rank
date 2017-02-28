@@ -75,6 +75,7 @@ div.location {
   position: sticky;
   top: 0;
   background-color: rgba(255, 255, 255, 1);
+  z-index: 200;
 }
 
 .filters > div {
@@ -127,14 +128,35 @@ div.location {
     &:hover {
       background-color: transparent;
     }
+    &:hover div:first-child:before {
+      display: inline-block;
+    }
   }
 
   .list-item > div {
     flex: none;
   }
 
+  .list-item div:first-child:before {
+    content: ':-)';
+    color: gold;
+    text-align: center;
+    line-height: 13rem;
+    font-size: 4rem;
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .8);
+    border-radius: 0.675rem;
+    z-index: 100;
+  }
+
   .list-item > div:first-child {
     margin: 0 0 1rem 0;
+    position: relative;
   }
 
   .list-item > div:last-child {

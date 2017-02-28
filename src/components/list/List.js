@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { store, filter } from "../store/Store"
+import { store, filter } from "../../Store"
 import { renderUser, cleanContainer } from "../user/User";
 
 import "./list.scss"

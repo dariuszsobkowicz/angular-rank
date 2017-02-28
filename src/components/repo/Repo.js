@@ -1,26 +1,33 @@
 import $ from "jquery";
-import { store } from "../store/Store";
+import { store } from "../../Store";
 import { renderUser, cleanContainer } from "../user/User";
 
 export function renderRepo (name) {
+    const container = $(".lightbox-container");
     let users = [];
     let repo = [];
 
     for (let key in store.state.mapReposUsers) {
-        if (key === name) {
-            users = [...store.state.mapReposUsers[key]]
+        if (store.state.mapReposUsers.hasOwnProperty(key)) {
+            if (key === name) {
+                users = [...store.state.mapReposUsers[key]]
+            }
         }
     }
 
     for (let key in store.state.mapReposName) {
-        if (key === name) {
-            repo = store.state.mapReposName[key]
+        if (store.state.mapReposName.hasOwnProperty(key)) {
+            if (key === name) {
+                repo = store.state.mapReposName[key]
+            }
         }
     }
 
     cleanContainer();
+    container.append($("<div class='lightbox'></div>"));
 
     const frame = repoTemplate(repo, users);
+    container.prepend($("<div class='close'>CLOSE</div>"));
 
     $(".lightbox").append(frame);
 

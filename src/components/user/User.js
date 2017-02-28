@@ -2,9 +2,14 @@ import $ from "jquery";
 import { renderRepo } from "../repo/Repo";
 
 export function renderUser (user) {
+    const container = $(".lightbox-container");
     cleanContainer();
 
+    container.append($("<div class='lightbox'></div>"));
+
     const frame = userTemplate(user);
+
+    container.prepend($("<div class='close'>CLOSE</div>"));
 
     $(".lightbox").append(frame);
 
@@ -53,5 +58,6 @@ function userTemplate (user) {
 }
 
 export function cleanContainer () {
-    $(".lightbox").empty();
+    $(".lightbox").remove();
+    $(".close").remove();
 }

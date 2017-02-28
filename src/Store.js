@@ -1,5 +1,5 @@
 import $ from "jquery";
-import { renderList } from "../list/List";
+import { renderList } from "./components/list/List";
 
 export const urls = {
     base:  "https://api.github.com",
@@ -33,8 +33,8 @@ export function dispatchData (callback) {
         store = JSON.parse(loadStore);
         renderList();
     } else {
+        $("#root").append($("<h2 class='loading'>Loading data...</h2>"));
         collectData(urls, store, function () {
-            console.log(store);
             callback();
         });
     }
@@ -94,7 +94,6 @@ function createRepoUsers (users, repos) {
         })
     })
 }
-
 
 function getData (urls) {
     const dfd = new $.Deferred();

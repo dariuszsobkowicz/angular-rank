@@ -1,5 +1,5 @@
 import $ from "jquery"
-import { dispatchData, store } from "./components/store/Store";
+import { dispatchData, store } from "./Store";
 import { renderList } from "./components/list/List"
 
 import "meyer-reset-sass";

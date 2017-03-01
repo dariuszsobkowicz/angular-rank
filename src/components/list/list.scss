@@ -8,15 +8,18 @@
 }
 
 .list-item {
-  border-top: 3px solid #dedcee;
+  border: 3px solid #dedcee;
   flex: 0 0 13rem;
   display: flex;
   align-items: center;
   cursor: pointer;
   font-weight: 900;
+  margin: 1rem 0;
+  box-shadow: 0.6rem 0.6rem #dedcee;
 
   &:hover {
-    background-color: #dedcee;
+    border: 3px solid #D2BCD7;
+    box-shadow: 0.6rem 0.6rem #D2BCD7;
   }
 }
 
@@ -68,7 +71,7 @@ div.location {
 
 .filters {
   font-size: 1.6rem;
-  padding: 2rem 9rem;
+  padding: 2rem 7.9rem 2rem 8.5rem;
   display: flex;
   flex-flow: row wrap;
   align-items: baseline;
@@ -110,15 +113,16 @@ div.location {
   & button {
     width: 15rem;
     height: 4rem;
-    border: 2px solid rgba(58, 197, 105, 1);
+    border: 4px solid rgba(58, 197, 105, .9);
     outline: none;
-    border-radius: 0.5rem;
-    font-size: 2rem;
-    color: rgba(0, 0, 0, 1);
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(58, 197, 105, 1);
     background-color: transparent;
 
     &:hover {
-      background-color: rgba(58, 197, 105, 1);
+      background-color: rgba(58, 197, 105, .9);
       color: rgba(255, 255, 255, 1);
     }
   }
@@ -134,7 +138,7 @@ div.location {
 
 @media screen and (max-width: 1150px) {
   .list, .list-item .user-name {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
 
   .list {
@@ -143,11 +147,12 @@ div.location {
   }
 
   .list-item {
-    border-top: none;
     flex-flow: column wrap;
-    margin: 0 0.5%;
+    margin: 1rem 0.5%;
+    box-shadow: 0.4rem 0.4rem #dedcee;
 
     &:hover {
+      box-shadow: 0.4rem 0.4rem #D2BCD7;
       background-color: transparent;
     }
     &:hover div:first-child:before {
@@ -160,7 +165,7 @@ div.location {
   }
 
   .list-item div:first-child:before {
-    content: ':-)';
+    content: '';
     color: gold;
     text-align: center;
     line-height: 13rem;
@@ -171,8 +176,7 @@ div.location {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, .8);
-    border-radius: 0.675rem;
+    background-color: rgba(0, 0, 0, .4);
     z-index: 100;
   }
 
@@ -182,14 +186,12 @@ div.location {
   }
 
   .list-item div:last-child {
-    margin: 0.5rem 0 2rem 0;
+    margin: 1.5rem 0 2rem 0;
     text-align: center;
   }
 
   .img-fluid {
-    border-radius: 0.675rem;
-    width: 100%;
-    height: auto;
+    border-radius: 0;
   }
 
   .list-item .user-name {

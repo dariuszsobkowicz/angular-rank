@@ -14,6 +14,12 @@
   overflow: scroll;
 }
 
+.lightbox {
+  background-color: rgba(0, 0, 0, 1);
+  padding: 3rem;
+  margin: 3rem 0 0 0;
+}
+
 .box-frame {
   display: flex;
   height: 100%;
@@ -53,10 +59,15 @@
   }
 }
 
+.box-list-columns {
+  //columns: 2;
+}
+
 .close {
   text-align: left;
   font-weight: 900;
   font-size: 2rem;
+  display: inline-block;
   cursor: pointer;
 }
 

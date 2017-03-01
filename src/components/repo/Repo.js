@@ -28,14 +28,31 @@ export function renderRepo (name) {
 
     const frame = repoTemplate(repo, users);
     container.prepend($("<div class='close'>CLOSE</div>"));
-
-    $(".lightbox").append(frame);
+    const lightbox = $(".lightbox");
+    lightbox.append(frame);
 
     $(".box-list").on("click", "li a", function (e) {
         e.stopImmediatePropagation();
         const that = $(this);
         const user = that.data("user");
         renderUser(user);
+    });
+    $(".close").on("click", function (e) {
+        $(".lightbox-container").hide();
+        cleanContainer();
+        $("body").css({
+            "position": "relative"
+        });
+    });
+    container.on("click", function (e) {
+        $(".lightbox-container").hide();
+        cleanContainer();
+        $("body").css({
+            "position": "relative"
+        });
+    });
+    lightbox.on("click", function (e) {
+        e.stopImmediatePropagation();
     });
 }
 
@@ -54,7 +71,7 @@ function repoTemplate (repo, users) {
                          </div>`;
 
     const reposContainer = $("<div class='box-list'></div>");
-    const ul = $("<ul></ul>");
+    const ul = $("<ul class='box-list-columns'></ul>");
     const reposList = users.map((user) => {
         counter++;
         const name = user.name === null ? user.login : user.name;

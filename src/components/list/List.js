@@ -1,6 +1,6 @@
 import $ from "jquery";
 import { store, filter } from "../../Store"
-import { renderUser, cleanContainer } from "../user/User";
+import { renderUser } from "../user/User";
 
 import "./list.scss"
 
@@ -59,7 +59,6 @@ function hideItems () {
 
 function assignListEvents () {
     const list = $(".list");
-    const body = $("body");
     const close = $(".close");
 
     list.on("click", "li", function (e) {
@@ -72,23 +71,6 @@ function assignListEvents () {
         });
 
         renderUser(user)
-    });
-
-    body.on("click", function (e) {
-        e.stopImmediatePropagation();
-        $(".lightbox-container").hide();
-        cleanContainer();
-        $("body").css({
-            "position": "relative"
-        });
-    });
-    close.on("click", function (e) {
-        e.stopImmediatePropagation();
-        $(".lightbox-container").hide();
-        cleanContainer();
-        $("body").css({
-            "position": "relative"
-        });
     });
 
     $(".contributions").on("click", function () {
@@ -116,6 +98,7 @@ function assignListEvents () {
 }
 
 function sortToggler (elem, filter) {
+    const body = $("body");
     let sort = "";
     if (elem.is(".active")) {
         sort = elem.is(".desc") ? "desc" : "asc";
@@ -127,6 +110,7 @@ function sortToggler (elem, filter) {
         elem.addClass("active");
         sort = "desc"
     }
+    !(body.scrollTop() >= 2000) || body.scrollTop(0);
     sortUsers(store.state.mapUsers, filter, sort)
 }
 

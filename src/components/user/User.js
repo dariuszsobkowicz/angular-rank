@@ -46,11 +46,10 @@ function userTemplate (user) {
     const followers = user.followers === 0 ? "zero" : user.followers;
     const public_gists = user.public_gists === 0 ? "zero" : user.public_gists;
     const public_repos = user.public_repos === 0 ? "zero" : user.public_repos;
-    let counter = 0;
 
     const userDetails = `<div class="box-details">
                             <div class="box-details-header">
-                                <div><img src=${user.avatar_url} alt="Username" class="img-fluid"></div>
+                                <div><img src=${user.avatar_url} alt="Username" class="img-fluid img-box"></div>
                                 <div><h2>${userName}</h2></div>
                             </div>
                             <ul>
@@ -63,9 +62,7 @@ function userTemplate (user) {
 
     const reposContainer = $("<div class='box-list'><h3>Repos List</h3></div>");
     const reposList = user.contributed_repos.map((elem) => {
-        counter++;
-        counter = counter < 10 ? "0" + counter : counter;
-        return `<li class="box-list-item"><span class="counter">${counter}.</span> <span class="repo-name"><a href="#" data-name=${elem}>${elem}</a></span></li>`
+        return `<li class="box-list-item"><a href="#" data-name=${elem}>${elem}</a></li>`
     });
     const ul = $("<ul class='box-list-columns'></ul>");
     ul.append(reposList);

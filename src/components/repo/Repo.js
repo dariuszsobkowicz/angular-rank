@@ -76,7 +76,7 @@ function repoTemplate (repo, users) {
         counter++;
         const name = user.name === null ? user.login : user.name;
         const elem = $("<li class='box-list-item'></li>");
-        const link = $("<a href='#' class='repo-name'></a>");
+        const link = $("<a href='#'></a>");
         link.data("user", user);
         link.text(name);
         elem.append(link);

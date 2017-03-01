@@ -11,20 +11,22 @@
   left: 50%;
   z-index: 300;
   transform: translate(-50%, -50%);
-  overflow: scroll;
 }
 
 .lightbox {
   background-color: rgba(0, 0, 0, 1);
+  border: 4px solid #dedcee;
   padding: 3rem;
   margin: 3rem 0 0 0;
+  height: 80vh;
+  overflow: hidden;
 }
 
 .box-frame {
   display: flex;
   height: 100%;
   font-size: 1.6rem;
-  margin: 4rem 0 0 0;
+  overflow: hidden;
 }
 
 .box-frame > div {
@@ -51,16 +53,45 @@
 
 .box-list-item {
   list-style: none;
-  padding: 1rem;
+  border: 3px solid #dedcee;
+  box-shadow: 0.3rem 0.3rem #dedcee;
+  margin: 1rem 1rem;
 
   & a {
+    padding: 1rem;
     color: rgba(255, 255, 255, 1);
     text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  &:hover {
+    border-color: #D2BCD7;
+    box-shadow: none;
+    background-color: #D2BCD7;
+    color: black;
+    transform: scale(1.1);
+
+    & a {
+      text-decoration: underline;
+      color: black;
+      text-indent: 2rem;
+    }
   }
 }
 
+.box-list {
+  height: 90%;
+}
+
 .box-list-columns {
-  //columns: 2;
+  height: 100%;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .close {
@@ -72,13 +103,8 @@
 }
 
 .counter {
-  color: #007AFF;
   display: inline-block;
   width: 3rem;
-}
-
-.repo-name:hover {
-  text-decoration: underline;
 }
 
 .box-details-header {
@@ -96,11 +122,30 @@
   }
 }
 
-@media screen and (max-width: 625px) {
+.img-box {
+  border: 0.5rem solid #dedcee;
+}
+
+@media screen and (max-width: 700px) {
   .box-frame {
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
+    overflow: scroll;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   .box-frame > div {
     width: 100%;
+  }
+
+  div.box-list {
+    margin: 2rem 0 0 0;
+  }
+
+  .box-list-columns {
+    margin: 2rem 0 0 0;
+    height: 100%;
+    overflow: visible;
   }
 }

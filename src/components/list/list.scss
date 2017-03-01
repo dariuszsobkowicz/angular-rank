@@ -41,9 +41,12 @@
 }
 
 .img-fluid {
-  border-radius: 0.675rem;
   width: 100%;
   height: auto;
+}
+
+.img-corners {
+  border-radius: 0.675rem;
 }
 
 .list-item .user-name {
@@ -190,7 +193,7 @@ div.location {
     text-align: center;
   }
 
-  .img-fluid {
+  .img-corners {
     border-radius: 0;
   }
 

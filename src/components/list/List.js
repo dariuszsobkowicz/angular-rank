@@ -54,7 +54,7 @@ function createFilters () {
 function hideItems () {
     const items = $(".list li");
     items.hide();
-    $(".list li:lt("+num+")").show();
+    $(".list li:lt(" + num + ")").show();
 }
 
 function assignListEvents () {
@@ -91,7 +91,7 @@ function assignListEvents () {
         const listSize = items.length;
 
         num = (num + 30 <= listSize) ? num + 30 : listSize;
-        $('.list li:lt('+num+')').show();
+        $('.list li:lt(' + num + ')').show();
         !(num >= listSize) || $(".more").hide();
     });
 
@@ -119,7 +119,7 @@ function createTemplate (item, name) {
     let number = item[name] === 0 ? "zero" : "+" + item[name];
     let location = item.location === null ? "" : item.location;
     li.data("user", item);
-    const template = `<div><img src=${item.avatar_url} alt=${item.login} class="img-fluid"></div>
+    const template = `<div><img src=${item.avatar_url} alt=${item.login} class="img-fluid img-corners"></div>
                       <div class="user-name">${item.login}</div>
                       <div class="location">${location}</div>
                       <div>${number}</div>`;

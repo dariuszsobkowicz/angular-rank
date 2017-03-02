@@ -62,7 +62,7 @@ function userTemplate (user) {
 
     const reposContainer = $("<div class='box-list'><h3>Repos List</h3></div>");
     const reposList = user.contributed_repos.map((elem) => {
-        return `<li class="box-list-item"><a href="#" data-name=${elem}>${elem}</a></li>`
+        return `<li class="box-list-item"><a href="#" data-name=${elem}>${elem}</a></li>`;
     });
     const ul = $("<ul class='box-list-columns'></ul>");
     ul.append(reposList);

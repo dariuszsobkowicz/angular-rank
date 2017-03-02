@@ -1,35 +1,38 @@
 const path                     = require("path"),
-      ExtractTextWebpackPlugin = require("extract-text-webpack-plugin"),
+      webpack                  = require("webpack"),
+      CleanPlugin              = require("clean-webpack-plugin"),
       HtmlWebpackPlugin        = require("html-webpack-plugin");
 
 module.exports = {
-    entry:   "./src/app.js",
-    output:  {
-        filename: "boundle.js",
+    entry:     {
+        app:    "./src/app.js",
+        vendor: "jquery"
+    },
+    output:    {
+        filename: "[chunkhash].[name].js",
         path:     path.resolve(__dirname, "dist")
     },
-    module:  {
+    module:    {
         rules: [
             {
                 test:    /\.js$/,
-                use:     "babel-loader",
+                use:     ["babel-loader", "eslint-loader"],
                 include: /src/
-            },
-            {
-                test: /\.scss$/,
-                use:  ExtractTextWebpackPlugin.extract({
-                    fallback: "style-loader",
-                    use:      ["css-loader", "postcss-loader", "sass-loader"]
-                })
             }
         ]
     },
-    plugins: [
-        new ExtractTextWebpackPlugin("styles.css"),
+    plugins:   [
         new HtmlWebpackPlugin({
             template: "./src/index.html",
             inject:   "body",
             filename: "index.html"
+        }),
+        new CleanPlugin(['dist'], {
+            root: path.resolve(__dirname),
+            verbose: true
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ["vendor", "manifest"]
         })
     ],
     devServer: {

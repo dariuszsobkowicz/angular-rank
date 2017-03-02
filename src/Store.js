@@ -49,9 +49,9 @@ export function fetchDetailsForFilters (users, callback) {
                 user = Object.assign(user, response);
                 counter++;
                 if (users.length === counter) {
-                    callback()
+                    callback();
                 }
-            })
+            });
     });
 }
 
@@ -75,8 +75,8 @@ function collectData (urls, store, callback) {
                 });
 
 
-            })
-        })
+            });
+        });
 }
 
 function createRepoUsers (users, repos) {
@@ -86,13 +86,13 @@ function createRepoUsers (users, repos) {
                 if (key === elem) {
                     if (repos.hasOwnProperty(key)) {
                         if (repos[key].indexOf(elem) === -1) {
-                            repos[key].push(user)
+                            repos[key].push(user);
                         }
                     }
                 }
             }
-        })
-    })
+        });
+    });
 }
 
 function getData (urls) {
@@ -108,12 +108,12 @@ function getData (urls) {
             counter++;
             arr.push(...response);
             if (urls.length === counter) {
-                dfd.resolve(arr)
+                dfd.resolve(arr);
             }
-        })
+        });
     });
 
-    return dfd
+    return dfd;
 }
 
 function assignRepoToUser (url, response) {
@@ -126,7 +126,7 @@ function assignRepoToUser (url, response) {
     store.state.mapReposUsers[name] = [];
 
     response.forEach((res) => {
-        res[prop] = [name]
+        res[prop] = [name];
     });
 }
 
@@ -138,19 +138,19 @@ function getUsers (repos, store, callback) {
         users.forEach((user) => {
 
             if (!(store.state.users.hasOwnProperty(user.login))) {
-                store.state.users[user.login] = user
+                store.state.users[user.login] = user;
             } else {
                 store.state.users[user.login].contributions += user.contributions;
-                store.state.users[user.login].contributed_repos.push(...user.contributed_repos)
+                store.state.users[user.login].contributed_repos.push(...user.contributed_repos);
             }
             counter++;
             if (users.length === counter) {
-                callback()
+                callback();
             }
         });
     });
 }
 
 function getUrls (repos) {
-    return repos.map((repo) => repo.contributors_url + urls.key)
+    return repos.map((repo) => repo.contributors_url + urls.key);
 }

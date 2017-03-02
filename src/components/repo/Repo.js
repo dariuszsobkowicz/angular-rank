@@ -10,7 +10,7 @@ export function renderRepo (name) {
     for (let key in store.state.mapReposUsers) {
         if (store.state.mapReposUsers.hasOwnProperty(key)) {
             if (key === name) {
-                users = [...store.state.mapReposUsers[key]]
+                users = [...store.state.mapReposUsers[key]];
             }
         }
     }
@@ -18,7 +18,7 @@ export function renderRepo (name) {
     for (let key in store.state.mapReposName) {
         if (store.state.mapReposName.hasOwnProperty(key)) {
             if (key === name) {
-                repo = store.state.mapReposName[key]
+                repo = store.state.mapReposName[key];
             }
         }
     }

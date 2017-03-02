@@ -1,10 +1,10 @@
-import $ from "jquery"
+import $ from "jquery";
 import { dispatchData, store } from "./Store";
-import { renderList } from "./components/list/List"
+import { renderList } from "./components/list/List";
 
 import "meyer-reset-sass";
-import "./scss/main.scss"
-import "./scss/lightbox.scss"
+import "./scss/main.scss";
+import "./scss/lightbox.scss";
 
 $(function () {
     dispatchData(function () {

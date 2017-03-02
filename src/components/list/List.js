@@ -1,8 +1,8 @@
 import $ from "jquery";
-import { store, filter } from "../../Store"
+import { store, filter } from "../../Store";
 import { renderUser } from "../user/User";
 
-import "./list.scss"
+import "./list.scss";
 
 let num = 0;
 
@@ -39,7 +39,7 @@ function createList (name) {
     list.empty();
     const items = store.state.mapUsers.map((item) => createTemplate(item, name));
     list.append(items);
-    return list
+    return list;
 }
 
 function createFilters () {
@@ -70,7 +70,7 @@ function assignListEvents () {
             "position": "fixed"
         });
 
-        renderUser(user)
+        renderUser(user);
     });
 
     $(".contributions").on("click", function () {
@@ -108,10 +108,10 @@ function sortToggler (elem, filter) {
             $(this).removeClass("active");
         });
         elem.addClass("active");
-        sort = "desc"
+        sort = "desc";
     }
     !(body.scrollTop() >= 2000) || body.scrollTop(0);
-    sortUsers(store.state.mapUsers, filter, sort)
+    sortUsers(store.state.mapUsers, filter, sort);
 }
 
 function createTemplate (item, name) {
@@ -125,15 +125,15 @@ function createTemplate (item, name) {
                       <div>${number}</div>`;
 
     li.append(template);
-    return li
+    return li;
 }
 
 export function sortUsers (data, filter, type) {
     if (type === "desc") {
         data.sort((a, b) => b[filter] - a[filter]);
-        replaceList(filter)
+        replaceList(filter);
     } else if (type === "asc") {
         data.sort((a, b) => a[filter] - b[filter]);
-        replaceList(filter)
+        replaceList(filter);
     }
 }
